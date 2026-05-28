@@ -10,13 +10,30 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 app = Flask(__name__)
 df = pd.read_csv("laptops.csv")
-# Dynamic mapping of RAM and storage strings to numerical values
-RAM_MAP = {x: int(x.split()[0]) for x in df["ram"].unique()}
-STORAGE_MAP = {x: int(x.split()[0]) * (1024 if "TB" in x else 1) for x in df["storage"].unique()}
+# Coerce price to numeric, converting headers or git conflict markers to NaN
+df["price"] = pd.to_numeric(df["price"], errors="coerce")
+# Dynamic mapping of RAM and storage strings to numerical values with robust error handling
+RAM_MAP = {}
+for x in df["ram"].dropna().unique():
+    try:
+        RAM_MAP[x] = int(str(x).split()[0])
+    except Exception:
+        pass
+STORAGE_MAP = {}
+for x in df["storage"].dropna().unique():
+    try:
+        value = int(str(x).split()[0])
+        if "TB" in str(x):
+            value *= 1024
+        STORAGE_MAP[x] = value
+    except Exception:
+        pass
 m_df = df.copy()
 m_df["ram"], m_df["storage"] = m_df["ram"].map(RAM_MAP), m_df["storage"].map(STORAGE_MAP)
-encoders = {c: LabelEncoder().fit(df[c]) for c in ["brand", "processor", "operating_system"]}
-for c, le in encoders.items(): m_df[c] = le.transform(df[c])
+# Drop any invalid rows, duplicate headers, or git conflict markers from the training set
+m_df = m_df.dropna()
+encoders = {c: LabelEncoder().fit(m_df[c].astype(str)) for c in ["brand", "processor", "operating_system"]}
+for c, le in encoders.items(): m_df[c] = le.transform(m_df[c].astype(str))
 X, y = m_df.drop(columns="price"), m_df["price"]
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 dt = DecisionTreeRegressor(random_state=42).fit(X_tr, y_tr)
@@ -37,20 +54,23 @@ metrics = {"Decision Tree": get_m(dt), "Random Forest": get_m(rf), "SVR": get_m(
 def index(): return render_template("index.html")
 @app.route("/api/options")
 def get_options():
-    maps = {'ram': RAM_MAP, 'storage': STORAGE_MAP}
-    return jsonify({
-         c: sorted(
-              df[c].unique().tolist(), 
-              key=lambda x: maps.get(c, {}).get(x, x)
-        ) 
-        for c in X.columns
-    })
+    options = {}
+    for c in X.columns:
+        if c in encoders:
+            options[c] = sorted(encoders[c].classes_.tolist())
+        elif c == 'ram':
+            options[c] = sorted(RAM_MAP.keys(), key=RAM_MAP.get)
+        elif c == 'storage':
+            options[c] = sorted(STORAGE_MAP.keys(), key=STORAGE_MAP.get)
+    return jsonify(options)
 @app.route("/api/metrics")
 def get_metrics_endpoint(): return jsonify(metrics)
 @app.route("/api/stats")
 def get_stats():
-    get_avg = lambda col, sort=None: (lambda g: {"labels": g.index.tolist(), "values": [round(v, 2) for v in g.tolist()]})(df.groupby(col)["price"].mean().reindex(sorted(df[col].unique().tolist(), key=sort)) if sort else df.groupby(col)["price"].mean())
-    p_cnt = df["processor"].value_counts()
+    # Use clean dataframe indices to build clean statistics, avoiding git conflict marker lines
+    df_c = df.loc[m_df.index]
+    get_avg = lambda col, sort=None: (lambda g: {"labels": g.index.tolist(), "values": [round(v, 2) for v in g.tolist()]})(df_c.groupby(col)["price"].mean().reindex(sorted(df_c[col].unique().tolist(), key=sort)) if sort else df_c.groupby(col)["price"].mean())
+    p_cnt = df_c["processor"].value_counts()
     return jsonify({"brand_prices": get_avg("brand"), "ram_prices": get_avg("ram", RAM_MAP.get), "storage_prices": get_avg("storage", STORAGE_MAP.get), "processor_counts": {"labels": p_cnt.index.tolist(), "values": p_cnt.tolist()}})
 @app.route("/api/predict", methods=["POST"])
 def predict():
@@ -70,15 +90,7 @@ def predict():
         "dt_price": round(float(dt.predict(feat)[0]), 2), 
         "rf_price": round(float(rf.predict(feat)[0]), 2)
     })
-<<<<<<< HEAD
-
 import os
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", 
 port=int(os.environ.get("PORT", 5000)))
-=======
-if __name__ == "__main__": app.run(debug=True, port=5000)
->>>>>>> 902c76c3bac7f385e822df0ca658feb88691b378
-
-

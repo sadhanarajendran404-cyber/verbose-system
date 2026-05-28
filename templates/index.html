@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Price Prediction & Analytics Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="ambient-glow glow-purple"></div><div class="ambient-glow glow-cyan"></div>
+<div class="container">
+<header>
+<div class="logo"><i class="fa-solid fa-laptop-code"></i><h1>Antigravity <span>Laptop Analytics</span></h1></div>
+<div class="badge"><span class="pulse-indicator"></span> Real-Time SVR Engine Active</div>
+</header>
+<main class="dashboard-grid">
+<section class="card form-card">
+<div class="card-header"><i class="fa-solid fa-sliders"></i><h2>Configure Specifications</h2></div>
+<form id="prediction-form">
+<div class="input-group"><label for="brand"><i class="fa-solid fa-copyright"></i> Brand</label><select id="brand" name="brand" required><option value="" disabled selected>Select Brand</option></select></div>
+<div class="input-group"><label for="processor"><i class="fa-solid fa-microchip"></i> Processor</label><select id="processor" name="processor" required><option value="" disabled selected>Select Processor</option></select></div>
+<div class="input-group-row">
+<div class="input-group"><label for="ram"><i class="fa-solid fa-memory"></i> RAM</label><select id="ram" name="ram" required><option value="" disabled selected>Select RAM</option></select></div>
+<div class="input-group"><label for="storage"><i class="fa-solid fa-hard-drive"></i> Storage</label><select id="storage" name="storage" required><option value="" disabled selected>Select Storage</option></select></div>
+</div>
+<div class="input-group"><label for="operating_system"><i class="fa-solid fa-window-restore"></i> OS</label><select id="operating_system" name="operating_system" required><option value="" disabled selected>Select OS</option></select></div>
+<button type="submit" class="btn-predict" id="predict-btn"><span>Predict Price</span> <i class="fa-solid fa-arrow-trend-up"></i></button>
+</form>
+</section>
+<section class="card result-card">
+<div class="card-header"><i class="fa-solid fa-receipt"></i><h2>Price Estimation</h2></div>
+<div class="prediction-placeholder" id="prediction-placeholder"><div class="placeholder-icon"><i class="fa-solid fa-circle-question"></i></div><p>Select specifications and press "Predict Price" to generate a live estimation.</p></div>
+<div class="prediction-content hidden" id="prediction-content">
+<div class="primary-prediction"><span class="pred-label">ESTIMATED PRICE</span><div class="price-display"><span class="currency">₹</span><span class="price-value" id="svr-price-val">0</span></div><div class="model-badge svr">SVR Model (Recommended)</div></div>
+<div class="alternate-predictions">
+<div class="alt-pred-box"><span class="alt-label">Decision Tree</span><span class="alt-val" id="dt-price-val">₹0</span></div>
+<div class="alt-pred-box"><span class="alt-label">Random Forest</span><span class="alt-val" id="rf-price-val">₹0</span></div>
+</div>
+</div>
+<div class="loading-overlay hidden" id="loading-overlay"><div class="spinner"></div><p>Analyzing specs and calculating pricing model...</p></div>
+</section>
+<section class="card model-metrics-card">
+<div class="card-header"><i class="fa-solid fa-gauge-high"></i><h2>Model Performance</h2></div>
+<div class="metrics-container" id="metrics-container"><div class="loading-placeholder"><div class="small-spinner"></div></div></div>
+</section>
+<section class="card charts-card">
+<div class="card-header"><i class="fa-solid fa-chart-line"></i><h2>Dataset Insights & Visualization</h2>
+<div class="chart-controls"><button class="tab-btn active" data-chart="brand">Brand vs Price</button><button class="tab-btn" data-chart="ram">RAM / Storage Influence</button><button class="tab-btn" data-chart="processor">Processor Shares</button></div>
+</div>
+<div class="chart-container-box">
+<div class="chart-wrapper" id="brand-chart-wrapper"><canvas id="brandChart"></canvas></div>
+<div class="chart-wrapper hidden" id="ram-chart-wrapper"><canvas id="ramChart"></canvas></div>
+<div class="chart-wrapper hidden" id="processor-chart-wrapper"><canvas id="processorChart"></canvas></div>
+</div>
+</section>
+</main>
+<footer><p>Antigravity Laptop Selection and Price Prediction Engine &bull; Built with Flask & Vanilla Web Technologies</p></footer>
+</div>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

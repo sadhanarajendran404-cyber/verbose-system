@@ -1,0 +1,13 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+:root {
+--bg-dark: #070a13; --bg-card: rgba(21, 28, 48, 0.65);
+--border-color: rgba(255, 255, 255, 0.08); --border-focus: rgba(99, 102, 241, 0.4);
+--text-primary: #f3f4f6; --text-secondary: #9ca3af;
+--primary-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+--accent-purple: #818cf8; --accent-cyan: #22d3ee;
+--card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); --neon-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+body { background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; display: flex; justify-content: center; overflow-x: hidden; position: relative; }
+.ambient-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(140px); opacity: 0.15; z-index: 0; pointer-events: none; }
+footer { text-align: center; padding: 1.5rem 0; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.85rem; margin-top: 2rem; }
+.hidden { display: none !important; }

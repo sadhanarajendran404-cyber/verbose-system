@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 brand,processor,ram,storage,operating_system,price
 Dell,Intel Core i5 11th Gen,8 GB DDR4 RAM,512 GB SSD,Windows,55000
 HP,Intel Core i7 12th Gen,16 GB DDR4 RAM,1 TB SSD,Windows,85000
@@ -19,3 +20,26 @@ Lenovo,Intel Core i9 12th Gen,32 GB DDR5 RAM,1 TB SSD,Windows,140000
 Asus,AMD Ryzen 9 6900HX,32 GB DDR5 RAM,2 TB SSD,Windows,180000
 Acer,Intel Core i5 10th Gen,8 GB DDR4 RAM,512 GB SSD,Windows,50000
 MSI,Intel Core i7 12th Gen,32 GB DDR5 RAM,2 TB SSD,Windows,145000
+=======
+brand,processor,ram,storage,operating_system,price
+Dell,Intel Core i5 11th Gen,8 GB DDR4 RAM,512 GB SSD,Windows,55000
+HP,Intel Core i7 12th Gen,16 GB DDR4 RAM,1 TB SSD,Windows,85000
+Lenovo,AMD Ryzen 5 5600H,8 GB DDR4 RAM,512 GB SSD,Windows,62000
+Asus,AMD Ryzen 7 6800H,16 GB DDR5 RAM,1 TB SSD,Windows,92000
+Acer,Intel Core i3 10th Gen,4 GB DDR4 RAM,256 GB SSD,Windows,38000
+Apple,Apple M1,8 GB Unified RAM,256 GB SSD,macOS,85000
+MSI,Intel Core i7 13th Gen,16 GB DDR5 RAM,1 TB SSD,Windows,105000
+Dell,Intel Core i9 13th Gen,32 GB DDR5 RAM,2 TB SSD,Windows,165000
+HP,AMD Ryzen 3 5300U,8 GB DDR4 RAM,512 GB SSD,Windows,45000
+Lenovo,Intel Core i5 12th Gen,16 GB DDR4 RAM,512 GB SSD,Windows,72000
+Asus,Intel Core i7 11th Gen,16 GB DDR4 RAM,1 TB SSD,Windows,78000
+Acer,AMD Ryzen 5 5500U,8 GB DDR4 RAM,512 GB SSD,Windows,52000
+Apple,Apple M2,16 GB Unified RAM,512 GB SSD,macOS,125000
+MSI,Intel Core i5 12th Gen,16 GB DDR5 RAM,512 GB SSD,Windows,80000
+Dell,AMD Ryzen 7 5800H,16 GB DDR4 RAM,1 TB SSD,Windows,90000
+HP,Intel Core i3 11th Gen,8 GB DDR4 RAM,256 GB SSD,Windows,42000
+Lenovo,Intel Core i9 12th Gen,32 GB DDR5 RAM,1 TB SSD,Windows,140000
+Asus,AMD Ryzen 9 6900HX,32 GB DDR5 RAM,2 TB SSD,Windows,180000
+Acer,Intel Core i5 10th Gen,8 GB DDR4 RAM,512 GB SSD,Windows,50000
+MSI,Intel Core i7 12th Gen,32 GB DDR5 RAM,2 TB SSD,Windows,145000
+>>>>>>> 902c76c3bac7f385e822df0ca658feb88691b378

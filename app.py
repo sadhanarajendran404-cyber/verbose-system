@@ -70,11 +70,15 @@ def predict():
         "dt_price": round(float(dt.predict(feat)[0]), 2), 
         "rf_price": round(float(rf.predict(feat)[0]), 2)
     })
+<<<<<<< HEAD
 
 import os
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", 
 port=int(os.environ.get("PORT", 5000)))
+=======
+if __name__ == "__main__": app.run(debug=True, port=5000)
+>>>>>>> 902c76c3bac7f385e822df0ca658feb88691b378
 
 

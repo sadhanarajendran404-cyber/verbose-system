@@ -12,7 +12,7 @@
 <div class="ambient-glow glow-purple"></div><div class="ambient-glow glow-cyan"></div>
 <div class="container">
 <header>
-<div class="logo"><i class="fa-solid fa-laptop-code"></i><h1>Antigravity <span>Laptop Analytics</span></h1></div>
+<div class="logo"><i class="fa-solid fa-laptop-code"></i><h1>LapPriceIQ <span>Laptop Analytics</span></h1></div>
 <div class="badge"><span class="pulse-indicator"></span> Real-Time SVR Engine Active</div>
 </header>
 <main class="dashboard-grid">
@@ -43,21 +43,4 @@
 </section>
 <section class="card model-metrics-card">
 <div class="card-header"><i class="fa-solid fa-gauge-high"></i><h2>Model Performance</h2></div>
-<div class="metrics-container" id="metrics-container"><div class="loading-placeholder"><div class="small-spinner"></div></div></div>
-</section>
-<section class="card charts-card">
-<div class="card-header"><i class="fa-solid fa-chart-line"></i><h2>Dataset Insights & Visualization</h2>
-<div class="chart-controls"><button class="tab-btn active" data-chart="brand">Brand vs Price</button><button class="tab-btn" data-chart="ram">RAM / Storage Influence</button><button class="tab-btn" data-chart="processor">Processor Shares</button></div>
-</div>
-<div class="chart-container-box">
-<div class="chart-wrapper" id="brand-chart-wrapper"><canvas id="brandChart"></canvas></div>
-<div class="chart-wrapper hidden" id="ram-chart-wrapper"><canvas id="ramChart"></canvas></div>
-<div class="chart-wrapper hidden" id="processor-chart-wrapper"><canvas id="processorChart"></canvas></div>
-</div>
-</section>
-</main>
-<footer><p>Antigravity Laptop Selection and Price Prediction Engine &bull; Built with Flask & Vanilla Web Technologies</p></footer>
-</div>
-<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
-</body>
-</html>
+
